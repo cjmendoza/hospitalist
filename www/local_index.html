@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>Vidaguard Mobile</title>
+</head>
+<body>
+<div data-role="page" id="index" data-url="index" tabindex="0"
+     class="ui-page ui-page-theme-a ui-page-header-fixed ui-page-active" style="padding-top: 79px; min-height: 415px;">
+
+    <div data-role="header" data-position="fixed" data-theme="a" role="banner"
+         class="ui-header ui-bar-a ui-header-fixed slidedown">
+        <h2 class="ui-title" role="heading" aria-level="1">Vidaguard Mobile</h2>
+        <div data-role="navbar" class="ui-navbar" role="navigation">
+            <ul class="ui-grid-d">
+                <li role="presentation" class="ui-block-a"><a href="#census" class="ui-link ui-btn">Census</a></li>
+                <li role="presentation" class="ui-block-b"><a href="#edit_visit"
+                                                              onclick="updateResourceContent('new','edit_visit','/hospitalist/edit_visit')"
+                                                              class="ui-link ui-btn">New</a></li>
+                <li role="presentation" class="ui-block-c"><a href="#msg" class="ui-link ui-btn">Msg</a></li>
+                <li role="presentation" class="ui-block-d"><a href="#compliance" class="ui-link ui-btn">Dx</a></li>
+                <li role="presentation" class="ui-block-e"><a href="#offline"
+                                                              class="ui-link ui-btn">Offline</a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <label for="visit_place_id">Documenting For</label>
+        <div class="ui-select">
+            <div id="visit_place_id-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
+                <span>Dr. Sample's PA</span>
+            </div>
+        </div>
+    </div>
+
+    <footer data-role="footer" role="contentinfo" class="ui-footer ui-bar-inherit">
+
+    </footer>
+</div>
+</body>
+</html>
