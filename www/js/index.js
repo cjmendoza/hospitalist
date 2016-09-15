@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        window.location.href = 'http://10.0.0.5:3000/mobile'; //'https://vidaguard.com/mobile'
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -43,9 +44,6 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        window.location.href = 'https://vidaguard.com/mobile'; //'http://localhost:3000/mobile'
-
         console.log('Received Event: ' + id);
     }
 };
