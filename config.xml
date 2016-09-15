@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.vidaguard.hospitalist" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.vidaguard.hospitalist" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Hospitalist</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Vidaguard mobile application for hospital care givers.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="support@vidaguard.com" href="http://vidaguard.com">
+        Vidaguard Team
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
@@ -50,6 +50,7 @@
         <splash density="port-xhdpi" src="www/res/screen/android/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
+        <preference name="LoadingDialog" value="Connecting to Vidaguard..."/>
     </platform>
     <platform name="ios">
         <icon height="57" platform="ios" src="www/res/icon/ios/icon.png" width="57" />
@@ -101,7 +102,8 @@
         <icon height="360" platform="windows" src="www/res/icon/windows/Wide310x150Logo.scale-240.png" width="744" />
         <splash height="1920" platform="windows" src="www/res/screen/windows/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
-    <access origin="*" />
+    <access origin="https://*.vidaguard.com" />
+    <access origin="http://localhost*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
