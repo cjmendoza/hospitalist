@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.vidaguard.hospitalist" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Hospitalist</name>
+    <description>
+        Vidaguard mobile application for hospital care givers.
+    </description>
+    <author email="support@vidaguard.com" href="http://vidaguard.com">
+        Vidaguard Team
+    </author>
+    <content src="index.html" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
+    <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
+    <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
+    <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
+    <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
+    <plugin name="cordova-plugin-device-motion" source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-device-orientation" source="npm" spec="~1.0.2" />
+    <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1" />
+    <plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0" />
+    <plugin name="cordova-plugin-geolocation" source="npm" spec="~2.1.0" />
+    <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
+    <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
+    <plugin name="cordova-plugin-media" source="npm" spec="~2.2.0" />
+    <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
+    <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
+    <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
+    <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
+    <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+    <icon src="icon.png" />
+    <platform name="android">
+        <preference name="LoadingDialog" value="Connecting to Vidaguard..."/>
+    </platform>
+    <platform name="ios">
+    </platform>
+    <platform name="wp8">
+    </platform>
+    <platform name="windows">
+    </platform>
+    <access origin="https://*.vidaguard.com" />
+    <access origin="http://localhost*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+</widget>
