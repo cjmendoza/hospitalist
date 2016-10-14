@@ -37,9 +37,10 @@
     </platform>
     <platform name="ios">
       <preference name="prerendered-icon" value="true" />
-      <icon src="img/logo120.png" />
-      <icon src="img/logo76.png" />
-      <icon src="img/logo152.png" />
+      <icon src="img/logo120.png" width="120" height="120" />
+      <icon src="img/logo76.png" width="76" height="76" />
+      <icon src="img/logo152.png" width="152" height="152" />
+      <splash src="res/screen/ios/Default-568h@2x~iphone.png" platform="ios" width="320" height="480" />
     </platform>
     <platform name="wp8">
     </platform>
