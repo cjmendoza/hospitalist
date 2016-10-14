@@ -37,6 +37,9 @@
     </platform>
     <platform name="ios">
       <preference name="prerendered-icon" value="true" />
+      <icon src="img/logo120.png" />
+      <icon src="img/logo76.png" />
+      <icon src="img/logo152.png" />
     </platform>
     <platform name="wp8">
     </platform>
