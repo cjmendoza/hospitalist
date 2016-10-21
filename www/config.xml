@@ -47,7 +47,8 @@
     <platform name="windows">
     </platform>
     <access origin="https://*.vidaguard.com" />
-    <access origin="http://localhost*" />
+    <access origin="http://10.0.0.5*" />
+    <access origin="http://release.vidaguard.*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
