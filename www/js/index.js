@@ -33,29 +33,75 @@ var app = {
   // The scope of 'this' is the event. In order to call the 'receivedEvent'
   // function, we must explicitly call 'app.receivedEvent(...);'
   onDeviceReady: function () {
-    app.receivedEvent('deviceready');
+    console.log('Received Device Ready Event');
+    console.log('calling setup push');
+    app.setupPush();
 
+    app.setConnection();
+  },
+  setupPush: function () {
+    console.log('calling push init');
+    var push = PushNotification.init({
+      "android": {
+        "senderID": "XXXXXXXX"
+      },
+      "browser": {},
+      "ios": {
+        "sound": true,
+        "vibration": true,
+        "badge": true
+      },
+      "windows": {}
+    });
+    console.log('after init');
+
+    push.on('registration', function (data) {
+      console.log('registration event: ' + data.registrationId);
+
+      var oldRegId = localStorage.getItem('registrationId');
+      if (oldRegId !== data.registrationId) {
+        // Save new registration ID
+        localStorage.setItem('registrationId', data.registrationId);
+        // Post registrationId to your app server as the value has changed
+        document.getElementById('notification-id').value = data.registrationId;
+      }
+
+      var parentElement = document.getElementById('registration');
+      var listeningElement = parentElement.querySelector('.waiting');
+      var receivedElement = parentElement.querySelector('.received');
+
+      listeningElement.setAttribute('style', 'display:none;');
+      receivedElement.setAttribute('style', 'display:block;');
+    });
+
+    push.on('error', function (e) {
+      console.log("push error = " + e.message);
+    });
+
+    push.on('notification', function (data) {
+      console.log('notification event');
+      navigator.notification.alert(
+        data.message,         // message
+        null,                 // callback
+        data.title,           // title
+        'Ok'                  // buttonName
+      );
+    });
+  },
+  setConnection: function () {
     var networkState = checkConnection();
     /* load local files if there is not network connection */
     if (networkState == Connection.NONE) {
       window.location = "local_index.html";
     } else {
-      window.location = 'https://vidaguard.com/mobile';
+      document.getElementById('notification-id').value = localStorage.getItem('registrationId');
+      console.log('notification id for login set to: ' + document.getElementById('notification-id').value);
+      //window.location = 'https://vidaguard.com/mobile';
     }
-    //window.location.href = 'http://10.0.0.5:3000/mobile'; //'https://vidaguard.com/mobile'
-  },
-  // Update DOM on a Received Event
-  receivedEvent: function (id) {
-    var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
 
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-    console.log('Received Event: ' + id);
+    //window.location.href = 'http://10.0.0.5:3000/mobile'; //'https://vidaguard.com/mobile'
   }
 };
-
 //Check Connection
 function checkConnection() {
   var networkState = navigator.network.connection.type;
