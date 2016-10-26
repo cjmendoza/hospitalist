@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var initialHref;
 var app = {
   // Application Constructor
   initialize: function () {
@@ -96,12 +97,21 @@ var app = {
     } else {
       document.getElementById('notification-id').value = localStorage.getItem('registrationId');
       console.log('notification id for login set to: ' + document.getElementById('notification-id').value);
+      initialHref = window.location.href;
       //window.location = 'https://vidaguard.com/mobile';
     }
 
     //window.location.href = 'http://10.0.0.5:3000/mobile'; //'https://vidaguard.com/mobile'
   }
 };
+
+function restartApplication() {
+  // Show splash screen (useful if your app takes time to load)
+  navigator.splashscreen.show();
+  // Reload original app url (ie your index.html file)
+  window.location = initialHref;
+}
+
 //Check Connection
 function checkConnection() {
   var networkState = navigator.network.connection.type;

@@ -39,31 +39,335 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/>
+
+    <link href="http://release.vidaguard.com:3000/assets/mobile_layout.css?body=1" media="all" rel="stylesheet" />
+    <link href="http://release.vidaguard.com:3000/assets/mobile.css?body=1" media="all" rel="stylesheet" />
+
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+<!--
+    <script src="http://release.vidaguard.com:3000/assets/jquery-ui-1.10.4.min.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/jquery.autocomplete.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/autocomplete.js?body=1"></script>
+-->
+    <script src="http://release.vidaguard.com:3000/assets/app_main.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/aws-sdk-2.5.4.min .js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/canvasDraw.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/charts.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/cors_upload.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/diagnostics.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/draw.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/helpers.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/imaging.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/messages.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/node_map.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/records.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/s3_api.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/security_curtain.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/application.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/mobile/ejs_production.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/mobile/hospitalist.js?body=1"></script>
+    <script src="http://release.vidaguard.com:3000/assets/mobile/mobile.js?body=1"></script>
+
+    <meta content="authenticity_token" name="csrf-param" />
+    <meta content="jkpUdVel6ynXdhhFJ+mEsLfUegIkKtcamjnq7enTuLs=" name="csrf-token" />
+
     <title>Vidaguard</title>
 </head>
 
 <body>
-<div class="app">
-    <h1>Hospitalist</h1>
-    <div class="login">
-        <form accept-charset="UTF-8" action="http://release.vidaguard.com:3000/mobile" method="post">
-            <input name="login[name]" type="text" placeholder="Login Name"/><br/>
-            <input name="login[password]" type="password" placeholder="Password"/><br/>
-            <input id="notification-id",  name="login[notification_id]" type="hidden", value="Unknown"/>
-            <input name="commit" type="submit" value="Log In"/>
-        </form>
+
+<div data-role="page" id="main">
+    <div data-role="header">
+        <h1>Hospitalist</h1>
+        </div>
+    <div role="main" class="ui-content">
+        <h1>Vidaguard</h1>
+        <div class="login">
+            <form accept-charset="UTF-8" action="http://release.vidaguard.com:3000/mobile" method="post" id="login-form">
+                <input name="login[name]" type="text" placeholder="Login Name"/>
+                <input name="login[password]" type="password" placeholder="Password"/>
+                <input id="notification-id",  name="login[device_id]" type="hidden", value="Unknown"/>
+                <input name="commit" type="submit" value="Log In"/>
+            </form>
+        </div>
+        <div id="registration" class="blink">
+            <p class="event waiting">Requesting Notification ID</p>
+            <br/>
+            <p class="event received">Receiving Notifications</p>
+        </div>
     </div>
-    <div id="registration" class="blink">
-        <p class="event waiting">Requesting Notification ID</p>
-        <br/>
-        <p class="event received">Receiving Notifications</p>
+
+    <footer data-role="footer">
+    <a href="#index">Cono View</a>
+    </footer>
+
+</div><!-- /page -->
+
+<div data-role="page" id="index">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <div data-role="navbar">
+            <ul>
+                <li><a class="nav-pills" href="#census">Census</a></li>
+                <li><a class="nav-pills" href="#edit_visit" onclick="updateResourceContent(&#39;new&#39;,&#39;edit_visit&#39;,&#39;/hospitalist/edit_visit&#39;)">New</a></li>
+                <li><a class="nav-pills" href="#msg" onclick="setMsgPat(&#39;all&#39;)">Msg</a></li>
+                <li><a class="nav-pills" href="#compliance">Dx</a></li>
+                <li><a class="nav-pills" href="#main">Logout</a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <label for="visit_place_id">Documenting For</label>
+        <select id="visit_place_id" name="visit[place_id]"><option selected="selected" value="2">Dr. Sample&#39;s PA</option>
+            <option value="297">West Gables Rehab</option></select>
+
     </div>
-</div>
+
+    <footer data-role="footer">
+
+    </footer>
+</div><!-- /page -->
+
+<div data-role="page" id="dialog" data-dialog="true">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <h1 id="dialog_header"></h1>
+    </div><!-- /header -->
+
+    <div id="dialog_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="census">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#index" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>Active</h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <ul id="census-list" data-role="listview" data-dividertheme="g">
+        </ul>
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="view_visit">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#census" data-ajax="false" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Visit</h1>
+    </div><!-- /header -->
+    <div id="view_visit_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="edit_visit">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Edit Visit</h1>
+    </div><!-- /header -->
+    <div id="edit_visit_content" role="main" class="ui-content">
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="comp-group-selectors">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#compliance" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Selectors</h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <h3 id="group-name" style="color: #005599"></h3>
+        <button class="ui-btn ui-btn-b ui-shadow ui-corner-all ui-btn-icon-right ui-icon-carat-d" onclick="showFilteredCodes()">
+            Show Diagnostics
+        </button>
+        <ul id="filtered-list" data-role="listview" data-inset="true"></ul>
+
+        <ul id="selector-list" data-role="listview" data-inset="true"></ul>
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="comp-group-codes">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#compliance" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Group Diagnostics</h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <ul id="group-codes-list" data-role="listview" data-inset="true">
+
+        </ul>
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="chosen-diagnostic">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Chosen Diagnostic</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <ul id="chosen-selector-list" data-role="listview" data-inset="true"></ul>
+        <a id="chosen-diagnostic-use" style="display: none" href="#edit_visit" class="ui-btn ui-btn-icon-right ui-icon-check">
+            Use for current patient</a>
+    </div>
+</div><!-- /page -->
+
+
+<div data-role="page" id="compliance">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#index" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>Diagnostics</h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <ul id="comp-groups-list" data-role="listview" data-dividertheme="g"></ul>
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="capture-image">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#index" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>Current Visits</h1>
+    </div><!-- /header -->
+
+    <div id="upload_picture" role="main" class="ui-content">
+        <legend>Upload Picture</legend>
+
+        <input type="file" accept="image/*;capture=camera" onchange="uploadPicture(this, 208, 160)"><br/>
+        <canvas id="up_pic" width="208" height="160" style="border: 2px solid green"></canvas>
+
+        <input id="pic_src" name="pic_src" type="hidden" />
+        <input id="pic_subject" name="pic[subject]" onclick="activateAC(this)" type="text" /><script>
+        //<![CDATA[
+        localAC('pic_subject', {"data":["Face sheet","Discharge Summary","Other"]})
+        //]]>
+    </script>
+
+    </div>
+</div><!-- /page -->
+
+<div data-role="page" id="msg">
+
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#index" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Messages</h1>
+
+        <div id="msg-header" data-role="navbar">
+            <ul>
+                <li> <a href="#" onclick="updateMessages(&#39;received_msg&#39;, &#39;Inbox&#39;, 2, 52)"><img alt="Inbox" src="/assets/inbox.png" /></a>
+                </li>
+                <li> <a href="#" onclick="updateMessages(&#39;sent_msg&#39;, &#39;Sent&#39;, 2, 52)"><img alt="Sent" src="/assets/sent.png" /></a>
+                </li>
+                <li><a data-remote="true" href="/hospitalist/new_msg?name=all" onclick="setMsgUrlPat(this)"><img alt="Write24" src="/assets/write24.png" /></a>
+                </li>
+                <li><a data-remote="true" href="/messages/search_msg?name=all" onclick="setMsgUrlPat(this)"><img alt="Search24" src="/assets/search24.png" /></a></li>
+            </ul>
+        </div>
+    </div><!-- /header -->
+
+    <div id="msg_dialog" role="main" class="ui-content" style="position: relative"> </div>
+</div><!-- /page -->
+
+<div data-role="page" id="demographics">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#view_visit" data-ajax="false" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Demographics</h1>
+    </div><!-- /header -->
+    <div id="demographics_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="history">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#view_visit" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>History</h1>
+    </div><!-- /header -->
+    <div id="history_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="orders">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#view_visit" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Orders</h1>
+    </div><!-- /header -->
+    <div id="orders_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="notes">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#view_visit" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Notes</h1>
+    </div><!-- /header -->
+    <div id="notes_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<div data-role="page" id="link_patient">
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="#view_visit" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <a href="#index" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-home">Home</a>
+        <h1>Link Patient</h1>
+    </div><!-- /header -->
+    <div id="link_patient_content" role="main" class="ui-content"></div>
+</div><!-- /page -->
+
+<style>
+    .nav-pills {
+        background: #fffae0 !important;
+    }
+</style>
+
 <script type="text/javascript" src="cordova.js"></script>
+
+<script src="http://10.0.0.5:8080/target/target-script-min.js#anonymous"></script>
+
 <script type="text/javascript" src="js/index.js"></script>
+<script>
+    $("#login-form").submit(function(e) {
+        var url = "http://release.vidaguard.com:3000/mobile"; // the script where you handle the form input.
+
+        console.log('Displaying web index');
+        //$( ":mobile-pagecontainer" ).pagecontainer( "load", "http://release.vidaguard.com:3000/hospitalist/index", 'page');
+
+  //console.log('Ajax to ' + url)
+    $j.ajax({
+           type: "POST",
+           url: url,
+           data: $("#login-form").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               //$( data ).appendTo( "#content" ).enhanceWithin();
+               //$('.app').hide();
+               //$("#web-content").html(data);
+               //$( "#content" ).pagecontainer( "load" );
+
+               //alert(data); // show response from the php script.
+
+               //$(data).appendTo( '#web-view' ).enhanceWithin();
+               $(':mobile-pagecontainer').pagecontainer("change", "cono");
+           }
+         });
+
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+
+</script>
 <script type="text/javascript">
+    var $j = jQuery.noConflict();
     app.initialize();
 </script>
+
 </body>
 
 </html>
