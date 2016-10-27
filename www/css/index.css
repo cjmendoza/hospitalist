@@ -110,6 +110,7 @@ h1 {
 }
  
 .blink {
+    text-align: center;
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }

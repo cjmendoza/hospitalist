@@ -37,8 +37,6 @@ var app = {
     console.log('Received Device Ready Event');
     console.log('calling setup push');
     app.setupPush();
-
-    app.setConnection();
   },
   setupPush: function () {
     console.log('calling push init');
