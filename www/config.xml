@@ -48,6 +48,7 @@
     </platform>
     <access origin="https://*.vidaguard.com" />
     <access origin="http://*.vidaguard.com" />
+    <access origin="http://10.0.0.5:*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

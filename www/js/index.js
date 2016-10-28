@@ -42,7 +42,7 @@ var app = {
     console.log('calling push init');
     var push = PushNotification.init({
       "android": {
-        "senderID": "XXXXXXXX"
+        "senderID": "760693419183"
       },
       "browser": {},
       "ios": {
@@ -98,8 +98,6 @@ var app = {
       initialHref = window.location.href;
       //window.location = 'https://vidaguard.com/mobile';
     }
-
-    //window.location.href = 'http://10.0.0.5:3000/mobile'; //'https://vidaguard.com/mobile'
   }
 };
 

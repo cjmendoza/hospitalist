@@ -67,6 +67,7 @@
             <p class="event waiting">Requesting Notification ID</p>
             <br/>
             <p class="event received">Receiving Notifications</p>
+            <p id="status"></p>
         </div>
     </div>
 
@@ -77,9 +78,9 @@
 </div><!-- /page -->
 
 <script type="text/javascript" src="cordova.js"></script>
-
+<!--
 <script src="http://10.0.0.5:8080/target/target-script-min.js#anonymous"></script>
-
+-->
 <script type="text/javascript" src="js/index.js"></script>
 <script>
     $("#login-form").submit(function(e) {
@@ -88,14 +89,18 @@
            type: "POST",
            url: url,
            data: $("#login-form").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-               console.log('Displaying web index');
-               var ref = cordova.InAppBrowser.open(
-                       'https://vidaguard.com/hospitalist/index', '_blank', 'location=no');
-               ref.addEventListener('loadstart', function(event) { $('#registration').html('<h2>Loading</h2>'); });
-               //ref.addEventListener('loadstop', function(event) { alert('Finished loading' + event.url); });
-               //ref.addEventListener('loaderror', function(event) { alert('Load Error'); });
+           success: function(data) {
+               if (data.includes('success')){
+                   $('#status').html('<h3>Loading...</h3>');
+                   var ref = cordova.InAppBrowser.open(
+                           'https://vidaguard.com/hospitalist/index', '_blank', 'location=no');
+                   ref.addEventListener('loadstop', function (event) {
+                       $('#status').html('');
+                   });
+                   ref.addEventListener('loaderror', function(event) { alert('Load Error'); });
+               }else{
+                   $('#status').html('<h3 style="color:red">Improper email/password combination</h3>');
+               }
            }
          });
 
