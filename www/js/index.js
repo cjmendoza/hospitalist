@@ -125,6 +125,7 @@ $("#login-form").submit(function(e) {
   e.preventDefault(); // avoid to execute the actual submit of the form.
 });
 
+//Restart the application
 function restartApplication() {
   // Show splash screen (useful if your app takes time to load)
   navigator.splashscreen.show();
