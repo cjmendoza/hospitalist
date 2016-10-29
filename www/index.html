@@ -56,7 +56,7 @@
     <div role="main" class="ui-content">
         <h1>Vidaguard</h1>
         <div class="login">
-            <form accept-charset="UTF-8" action="http://release.vidaguard.com:3000/mobile" method="post" id="login-form">
+            <form accept-charset="UTF-8" method="post" id="login-form">
                 <input name="login[name]" type="text" placeholder="Login Name"/>
                 <input name="login[password]" type="password" placeholder="Password"/>
                 <input id="notification-id",  name="login[device_id]" type="hidden", value="Unknown"/>
@@ -82,32 +82,7 @@
 <script src="http://10.0.0.5:8080/target/target-script-min.js#anonymous"></script>
 -->
 <script type="text/javascript" src="js/index.js"></script>
-<script>
-    $("#login-form").submit(function(e) {
-        var url = "https://vidaguard.com/mobile"; // the script where you handle the form input.
-    $.ajax({
-           type: "POST",
-           url: url,
-           data: $("#login-form").serialize(), // serializes the form's elements.
-           success: function(data) {
-               if (data.includes('success')){
-                   $('#status').html('<h3>Loading...</h3>');
-                   var ref = cordova.InAppBrowser.open(
-                           'https://vidaguard.com/hospitalist/index', '_blank', 'location=no');
-                   ref.addEventListener('loadstop', function (event) {
-                       $('#status').html('');
-                   });
-                   ref.addEventListener('loaderror', function(event) { alert('Load Error'); });
-               }else{
-                   $('#status').html('<h3 style="color:red">Improper email/password combination</h3>');
-               }
-           }
-         });
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-});
-
-</script>
 <script type="text/javascript">
     app.initialize();
 </script>

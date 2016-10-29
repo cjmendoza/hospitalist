@@ -101,6 +101,30 @@ var app = {
   }
 };
 
+$("#login-form").submit(function(e) {
+  var url = "https://vidaguard.com/mobile"; // the script where you handle the form input.
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: $("#login-form").serialize(), // serializes the form's elements.
+    success: function(data) {
+      if (data.includes('success')){
+        $('#status').html('<h3>Loading...</h3>');
+        var ref = cordova.InAppBrowser.open(
+          'https://vidaguard.com/hospitalist/index', '_blank', 'location=no');
+        ref.addEventListener('loadstop', function (event) {
+          $('#status').html('');
+        });
+        ref.addEventListener('loaderror', function(event) { alert('Load Error'); });
+      }else{
+        $('#status').html('<h3 style="color:red">Improper email/password combination</h3>');
+      }
+    }
+  });
+
+  e.preventDefault(); // avoid to execute the actual submit of the form.
+});
+
 function restartApplication() {
   // Show splash screen (useful if your app takes time to load)
   navigator.splashscreen.show();
